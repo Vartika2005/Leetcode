@@ -1,0 +1,13 @@
+class Solution {
+public:
+    char findTheDifference(string s, string t) {
+        char result = 0;
+        for(char c : s) {
+            result = result ^ c;  // XOR all chars from s
+        }
+        for(char c : t) {
+            result = result ^ c;  // XOR all chars from t
+        }
+        return result;  // Remaining char is the extra one
+    }
+};
