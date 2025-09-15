@@ -1,0 +1,13 @@
+class Solution {
+  public:
+    // Function to remove duplicates from the given array.
+    vector<int> removeDuplicates(vector<int> &arr) {
+        // Use an ordered set to store unique elements
+        set<int> s(arr.begin(), arr.end());
+
+        // Copy elements of set back into a vector
+        vector<int> result(s.begin(), s.end());
+
+        return result;
+    }
+};
