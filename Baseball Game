@@ -1,0 +1,51 @@
+class Solution {
+public:
+    //check if a string is a valid integer
+    bool isInteger(const string& str){
+        if(str.empty()) return false;
+
+        int i=0;
+        if(str[0] == '-' || str[0] == '+') i=1; //is the score is like -2 then it skip the sign and then check
+
+        //Reject "+" or "-" alone
+        if(i == str.size()) return false; //as sign appear i=1 and then for sign 1==1 the false
+
+        for(;i<str.size();i++){
+            if(!isdigit(str[i])) return false;
+        }
+        return true;
+    }
+    int calPoints(vector<string>& operations) {
+        stack<int> s;
+        for(int i=0; i<operations.size(); i++){
+            if(isInteger(operations[i])){
+                s.push(stoi(operations[i])); //convert string into integer
+            }
+            
+            else if(operations[i] == "C"){
+                if(!s.empty())
+                s.pop();
+            }
+            else if(operations[i] == "D") {
+                if(!s.empty()) 
+                s.push(2* s.top());
+            }
+            else if(operations[i] == "+"){
+                if(s.size() >= 2){
+                    int top = s.top();
+                    s.pop();
+                    int second = s.top();
+                    s.push(top); //restore top
+                    s.push(top + second); //push sum
+                }
+             }
+            }
+            int sum = 0;
+            while(!s.empty()){
+                sum = sum+s.top();
+                s.pop();
+            }
+            return sum;
+      
+    }
+};
