@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int strStr(string haystack, string needle) {
+        int n1 = haystack.size();
+        int n2 = needle.size();
+        int i=0,j=0;
+        int ans = -1;
+        while(i<n1 && j<n2){ 
+            j=0;
+            if(haystack[i] == needle[j]){
+                ans = i;
+                while(i<n1 && j<n2){
+                    if(haystack[i] == needle[j]){
+                        i++;
+                        j++;
+                    }
+                    else{
+                        i= ans+1;
+                        break;
+                    }
+                }
+                if(j==n2)
+                   return ans;
+            }
+            else i++;
+        }
+        return -1;
+    }
+};
