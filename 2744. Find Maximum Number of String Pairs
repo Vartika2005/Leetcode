@@ -1,0 +1,41 @@
+//less optimal with T.C = O(n^2 * K)
+class Solution {
+public:
+    int maximumNumberOfStringPairs(vector<string>& words) {
+        int count = 0;
+        int n = words.size();
+        for(int i=0;i<n-1;i++) {
+            for(int j=i+1; j<n; j++){
+                string rev = words[j];
+                reverse(rev.begin(),rev.end());
+                if(words[i] == rev) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+};
+
+//more optimal T.C= O(n*k) ans S.C = O(k)
+class Solution {
+public:
+    int maximumNumberOfStringPairs(vector<string>& words) {
+        unordered_set<string> s;
+        int count = 0;
+
+        for(int i=0; i<words.size(); i++){
+            string rev = words[i];
+            reverse(rev.begin(),rev.end());
+            if(s.count(rev)){
+                count++;
+                s.erase(rev);m//remove the used word from the set to remove duplicate
+            }
+            else{
+                s.insert(words[i]); //otherwise add this word to set for future pairing
+            }
+        }
+        return count;
+    }
+};
+
