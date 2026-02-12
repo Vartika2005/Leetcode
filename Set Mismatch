@@ -1,0 +1,54 @@
+//optimal approach with T.C=O(n) and S.C=O(1)
+
+class Solution {
+public:
+    vector<int> findErrorNums(vector<int>& nums) {
+        int duplicate = -1, missing = -1;
+
+        for(int i=0;i<nums.size();i++){
+            int index = abs(nums[i])-1;
+
+            if(nums[index] < 0)
+                duplicate = abs(nums[i]);
+            else 
+                nums[index] *= -1;
+        }
+        for(int i=0;i<nums.size();i++){
+            if(nums[i]>0)
+                missing = i + 1;
+        }
+
+        return {duplicate, missing};
+    }
+};
+
+
+
+T.C - O(nlogn) & S.C - O(n)
+class Solution {
+public:
+    vector<int> findErrorNums(vector<int>& nums) {
+        int n = nums.size();
+        vector<int> ans;
+
+        sort(nums.begin(),nums.end());
+        for(int i=1;i<n;i++){
+            if(nums[i] == nums[i-1]) {
+                ans.push_back(nums[i]);
+                break;
+            }
+        }
+        set<int> s;
+        for(int i=0;i<nums.size();i++){
+            s.insert(nums[i]);
+        }
+        for(int i=1;i<=n ;i++){
+            if(!s.contains(i)){
+                ans.push_back(i);
+                break;
+            }
+        }
+        return ans;
+
+    }
+};
