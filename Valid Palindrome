@@ -1,0 +1,47 @@
+T.C=O(n) & S.C=O(1)
+class Solution {
+public:
+    bool isPalindrome(string s) {
+        int n = s.size();
+
+        int i=0,j=n-1;
+        while(i<j){
+            while(i<j && !isalnum(s[i])) i++;
+            while(i<j && !isalnum(s[j])) j--;
+
+            if(tolower(s[i]) != tolower(s[j]))
+                return false;
+
+            i++;
+            j--;
+        }
+        return true;
+    }
+};
+
+T.C=O(n) & S.C=O(n)
+class Solution {
+public:
+    bool isPalindrome(string s) {
+        int n = s.size();
+        vector<char> ans;
+        for(int i=0;i<n;i++){
+            if(isalnum(s[i])) {
+                ans.push_back(tolower(s[i]));
+            }
+        }
+        int i=0, j=ans.size()-1;
+        while(i<=j){
+            if(ans[i]==ans[j]){
+                i++;
+                j--;
+            }
+            else{
+                return false;
+                break;
+            }
+            
+        }
+        return true;
+    }
+};
