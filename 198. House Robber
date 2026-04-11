@@ -1,0 +1,30 @@
+class Solution {
+public:
+
+    int rec(vector<int>& nums, int i, vector<int>& dp) {
+
+            //base case
+            if(i >= nums.size()){
+                return 0;
+            }
+
+            if(dp[i] != -1) return dp[i];
+            //recurrence relation
+            int steal = nums[i] + rec(nums, i+2,dp);
+
+            int skip = 0 + rec(nums, i+1,dp);
+
+            //store in dp
+            dp[i] = max(skip,steal);
+
+            //return statement
+            return max(steal, skip);
+
+        }
+
+    int rob(vector<int>& nums) {
+        vector<int>dp(nums.size(), -1);
+        return rec(nums,0, dp);
+        
+    }
+};
